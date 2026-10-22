@@ -7,6 +7,8 @@ dependencies, no JavaScript framework. Light and dark themes come built in.
 It works for dense app screens (sidebar, week planner, stat tiles) as well as plain
 content pages (articles, landing pages, documentation).
 
+**Live examples:** [component gallery](https://falkue.github.io/warm-paper-ui/examples/index.html) · [app shell](https://falkue.github.io/warm-paper-ui/examples/app-shell.html) · [article](https://falkue.github.io/warm-paper-ui/examples/article.html) · [D3 charts](https://falkue.github.io/warm-paper-ui/examples/charts.html)
+
 | | |
 |---|---|
 | **Examples** | open `examples/index.html` in a browser (works straight from disk) |

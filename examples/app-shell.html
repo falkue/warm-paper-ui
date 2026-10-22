@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Studio Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/theme.js"></script>
+  <script src="../icons/icons.js" defer></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- Mobile top bar (shown below 760px) -->
+  <header class="mobile-bar">
+    <button class="btn ghost icon" data-sidebar-open aria-label="Open menu" aria-expanded="false">
+      <svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Northwind</a>
+  </header>
+  <div class="scrim" hidden></div>
+
+  <!-- Sidebar -->
+  <aside class="side" aria-label="Sidebar">
+    <div class="side-head">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Northwind</a>
+      <span class="sp"></span>
+      <button class="btn ghost icon only-mobile" data-sidebar-close aria-label="Close menu">
+        <svg class="ic" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+
+    <div class="account">
+      <span class="avatar lg">NS</span>
+      <div><b>Northwind Studio</b><small>Shared workspace</small></div>
+    </div>
+
+    <nav class="nav" aria-label="Sections">
+      <a class="nav-item" href="#" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>Planning<span class="count">9</span></a>
+      <a class="nav-item" href="#"><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg>Ideas<span class="count">17</span></a>
+      <a class="nav-item" href="#"><svg class="ic" aria-hidden="true"><use href="#i-bars"/></svg>Projects<span class="count">3</span></a>
+      <a class="nav-item" href="#"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>Feedback<span class="badge">2</span></a>
+      <a class="nav-item" href="#"><svg class="ic" aria-hidden="true"><use href="#i-chart-line"/></svg>Reports</a>
+      <a class="nav-item" href="#"><svg class="ic" aria-hidden="true"><use href="#i-image"/></svg>Library</a>
+      <a class="nav-item" href="#"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg>Settings</a>
+    </nav>
+
+    <div>
+      <div class="label side-label">Channels</div>
+      <a class="nav-row" href="#"><span class="dot c-blue"></span>Website<span class="status">connected</span></a>
+      <a class="nav-row" href="#"><span class="dot c-orange"></span>Newsletter<span class="status warn">renew soon</span></a>
+      <div class="nav-row muted">+ Add channel</div>
+      <div class="label side-label">Devices</div>
+      <div class="nav-row"><svg class="ic sm muted" aria-hidden="true"><use href="#i-phone"/></svg>Mobile app<span class="status off">paused</span></div>
+    </div>
+
+    <div class="side-foot">
+      <span class="seg" role="group" aria-label="Theme">
+        <button data-theme-set="light">Light</button><button data-theme-set="dark">Dark</button><button data-theme-set="system">Auto</button>
+      </span>
+      <span class="row"><span class="dot sm c-green"></span>All changes saved</span>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+    <div class="view">
+      <section class="view-main" aria-label="Week plan">
+        <div class="topbar">
+          <h1 class="title">Week <em>43</em></h1>
+          <span class="sub">19 – 25 October 2026</span>
+          <span class="sp"></span>
+          <div class="seg" role="group" aria-label="Range">
+            <button aria-pressed="true">Week</button><button aria-pressed="false">Month</button><button aria-pressed="false">List</button>
+          </div>
+          <button class="btn primary"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>New entry</button>
+        </div>
+
+        <div class="section">
+          <div class="stats">
+            <div class="stat"><b>3<span class="delta">of 3</span></b><span>Entries this week (goal)</span></div>
+            <div class="stat"><b>14,790<span class="delta">+22%</span></b><span>Visits, last 4 weeks</span></div>
+            <div class="stat"><b>3.6%<span class="delta down">−0.4</span></b><span>Average reply rate</span></div>
+            <div class="stat"><b>41</b><span>Newsletter sign-ups</span></div>
+          </div>
+        </div>
+
+        <div class="section scroll-x" tabindex="0" aria-label="Week grid, scrolls sideways on small screens">
+          <div class="week">
+            <div class="day-head"><span class="wd">Mon</span><span class="n">19</span></div>
+            <div class="day-head"><span class="wd">Tue</span><span class="n">20</span></div>
+            <div class="day-head"><span class="wd">Wed</span><span class="n">21</span></div>
+            <div class="day-head today"><span class="wd">Thu · today</span><span class="n">22</span></div>
+            <div class="day-head"><span class="wd">Fri</span><span class="n">23</span></div>
+            <div class="day-head"><span class="wd">Sat</span><span class="n">24</span></div>
+            <div class="day-head"><span class="wd">Sun</span><span class="n">25</span></div>
+
+            <div class="band"><a class="span-bar" href="#" style="grid-column: 1 / span 5">Autumn launch · goal: 120 sign-ups</a></div>
+
+            <div class="day">
+              <a class="event" href="#"><span class="time">08:00 · Article</span><p>Five questions before your first redesign</p><span class="meta">1,920 visits · 64 replies</span><span class="pill c-green">published</span></a>
+            </div>
+            <div class="day"><button class="empty add" aria-label="Add entry on Tuesday">+</button></div>
+            <div class="day">
+              <a class="event" href="#"><span class="time">09:30 · Case study</span><p>How a small bakery doubled its pre-orders</p><span class="meta">2,740 visits · 112 replies</span><span class="pill c-green">published</span></a>
+            </div>
+            <div class="day today">
+              <a class="event edge c-blue" href="#"><span class="time">11:30 · Photo story</span><p>Behind the scenes: the new workshop</p><span class="pill c-blue">scheduled</span></a>
+              <button class="empty add" aria-label="Add entry on Thursday">+</button>
+            </div>
+            <div class="day">
+              <div class="event placeholder c-violet"><span class="time">Slot · Newsletter</span><p>Launch recap</p><span class="pill out c-violet">planned</span></div>
+            </div>
+            <div class="day"><button class="empty" aria-label="Add entry on Saturday">+</button></div>
+            <div class="day">
+              <a class="event" href="#"><span class="time">19:00 · Note</span><p>Weekly review</p><span class="pill out">draft</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="chips">
+            <span class="label">Ideas ready</span>
+            <a class="chip" href="#"><span class="dot c-violet"></span>Common mistakes in onboarding</a>
+            <a class="chip" href="#"><span class="dot c-violet"></span>Workshop warm-ups <span class="muted small">· 0:48 audio</span></a>
+            <a class="chip" href="#"><span class="dot"></span>Book of the month</a>
+            <span class="muted small">Drag to schedule</span>
+          </div>
+        </div>
+
+        <div class="section" style="padding-bottom: 24px">
+          <div class="label" style="padding-bottom: 2px">Drafts</div>
+          <div class="list">
+            <a class="list-row" href="#"><span class="avatar square sm c-violet">CS</span><div><b>Case study: a calmer checkout</b><small>Edited 2 hours ago · 640 words</small></div><span class="pill c-yellow">needs review</span></a>
+            <a class="list-row" href="#"><span class="avatar square sm c-blue">AR</span><div><b>Article: colour as meaning, not decoration</b><small>Edited yesterday · 1,120 words</small></div><span class="pill out">draft</span></a>
+            <a class="list-row" href="#"><span class="avatar square sm c-green">NL</span><div><b>Newsletter: October roundup</b><small>Edited 3 days ago · 410 words</small></div><span class="pill c-green">ready</span></a>
+          </div>
+        </div>
+      </section>
+
+      <aside class="view-pane" aria-label="Today">
+        <h2 class="h4">Today, <em>Thursday</em></h2>
+
+        <div class="card">
+          <div class="row"><span class="dot c-blue"></span><div><b>Website · 11:30</b><div class="muted small">Behind the scenes: the new workshop</div></div></div>
+          <div class="row wrap small"><span class="pill c-blue">publishes automatically</span><span class="muted">in 2 h 10 min</span></div>
+          <div class="row wrap"><button class="btn">Preview</button><button class="btn">Move</button><button class="btn ghost">Publish manually</button></div>
+        </div>
+
+        <div class="card">
+          <div><b>Add the numbers</b><div class="muted small">“Five questions …” · 7 days after publishing</div></div>
+          <div class="form-grid">
+            <label class="field">Visits<input class="input num" inputmode="numeric" value="1,920"></label>
+            <label class="field">Replies<input class="input num" inputmode="numeric" value="64"></label>
+          </div>
+          <button class="btn ghost" style="align-self: flex-start">Or upload a CSV export</button>
+        </div>
+
+        <div class="card tinted">
+          <span class="label">Suggestion</span>
+          <div class="small" style="color: var(--ink-2)">Wednesday 28 October is still free. Case studies reach about twice as many readers as short notes. From your ideas, <b style="color: var(--ink)">Common mistakes in onboarding</b> fits.</div>
+          <button class="btn tint" style="align-self: flex-start">Schedule for Wed 08:00</button>
+        </div>
+
+        <div>
+          <div class="label" style="padding-bottom: 8px">Activity</div>
+          <ol class="timeline">
+            <li><span class="node c-green"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><div><b>Case study published</b><small>Yesterday, 09:30</small></div></li>
+            <li><span class="node c-violet"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg></span><div><b>Two new comments</b><small>Yesterday, 14:05</small></div></li>
+            <li><span class="node"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg></span><div><b>Draft updated</b><small>Today, 08:12</small></div></li>
+          </ol>
+        </div>
+
+        <div class="note">
+          <b>Coming later:</b> shared review rounds and a monthly report.
+          <ul><li>Comment threads per entry</li><li>Export as PDF</li></ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+</body>
+</html>

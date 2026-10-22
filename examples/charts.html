@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Chart Examples</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/theme.js"></script>
+  <!-- D3, pinned to an exact version with subresource integrity -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"
+          integrity="sha512-vc58qvvBdrDR4etbxMdlTt4GBQk1qjvyORR2nrsPsFPyrs+/u5c3+1Ct6upOgdZoIl7eq6k3a1UPDSNAQi/32A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="../js/chart-theme.js"></script>
+</head>
+<body>
+
+<header class="site-bar">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Northwind Studio</a>
+    <span class="sp"></span>
+    <nav class="site-nav" aria-label="Examples">
+      <a href="index.html">Gallery</a><a href="app-shell.html">App shell</a><a href="article.html">Article</a><a href="charts.html" aria-current="page">Charts</a>
+    </nav>
+    <span class="seg" role="group" aria-label="Theme">
+      <button data-theme-set="light">Light</button><button data-theme-set="dark">Dark</button><button data-theme-set="system">Auto</button>
+    </span>
+  </div>
+</header>
+
+<main class="container" style="padding-bottom: 48px">
+  <header class="hero">
+    <span class="kicker">Reports · Example data</span>
+    <h1>Charts that <em>stay quiet</em></h1>
+    <p class="lead">Three D3 charts styled entirely from the kit's tokens: hairline axes, muted sans labels, serif titles, and at most four series colours in a fixed order. Switch the theme and they re-render with the dark values.</p>
+  </header>
+
+  <div class="stack" style="gap: 18px">
+
+    <!-- 1. Column chart -->
+    <section class="card" aria-labelledby="c1-title" style="padding: 16px">
+      <div class="chart-head">
+        <h2 id="c1-title" class="chart-title">Monthly <em>visits</em></h2>
+        <p>Website visits per month, November 2025 to October 2026</p>
+      </div>
+      <div class="chart" id="c1" role="img" aria-label="Column chart of monthly website visits. Peak in October 2026 with 18,400 visits."></div>
+      <details class="chart-table" data-for="c1"><summary>Show as table</summary></details>
+      <details class="note small">
+        <summary><b>Why this form</b></summary>
+        <ul>
+          <li>Column chart: one measure across ordered, discrete periods; heights compare well. <b>Chosen.</b></li>
+          <li>Line chart: good for trend, but twelve monthly totals read as separate amounts here.</li>
+          <li>Stat tile with sparkline: right if only the latest value mattered.</li>
+          <li>Calendar heatmap: needs daily data to be worth it.</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- 2. Multi-series line chart -->
+    <section class="card" aria-labelledby="c2-title" style="padding: 16px">
+      <div class="chart-head">
+        <h2 id="c2-title" class="chart-title">Sign-ups by <em>channel</em></h2>
+        <p>New subscribers per week, last 12 weeks</p>
+      </div>
+      <div class="legend" id="c2-legend"></div>
+      <div class="chart" id="c2" role="img" aria-label="Line chart of weekly sign-ups for three channels over twelve weeks. Website grows the most."></div>
+      <details class="chart-table" data-for="c2"><summary>Show as table</summary></details>
+      <details class="note small">
+        <summary><b>Why this form</b></summary>
+        <ul>
+          <li>Multi-series line: change over time for three series on one shared scale. <b>Chosen.</b></li>
+          <li>Stacked area: shows the total, but makes the individual channels hard to compare.</li>
+          <li>Grouped columns: 36 bars are too many to read a trend from.</li>
+          <li>Slope chart: only first and last week; hides the mid-period dip.</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- 3. Small multiples -->
+    <section class="card" aria-labelledby="c3-title" style="padding: 16px">
+      <div class="chart-head">
+        <h2 id="c3-title" class="chart-title">Reply rate by <em>weekday</em></h2>
+        <p>Share of readers who replied, by content type and publishing day (same scale in every panel)</p>
+      </div>
+      <div class="multiples" id="c3"></div>
+      <details class="chart-table" data-for="c3"><summary>Show as table</summary></details>
+      <details class="note small">
+        <summary><b>Why this form</b></summary>
+        <ul>
+          <li>Small multiples of columns: four groups by seven days; one panel per type keeps each pattern readable. <b>Chosen.</b></li>
+          <li>Heatmap (type × day): compact, but colour is a weaker channel for exact rates.</li>
+          <li>Grouped columns: 28 bars with four colours compete with each other.</li>
+          <li>Four-line chart: weekdays are categories, not a continuous time axis.</li>
+        </ul>
+      </details>
+    </section>
+  </div>
+</main>
+
+<script>
+(function () {
+  if (!window.d3) {
+    document.querySelectorAll('.chart, .multiples').forEach(function (el) {
+      el.innerHTML = '<p class="note">D3 could not be loaded (offline?). The charts need the D3 script from the CDN.</p>';
+    });
+    return;
+  }
+
+  /* ---------- Example data (invented) ---------- */
+  var months = ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+  var visits = [9200, 8100, 10400, 11200, 12900, 12100, 13800, 12600, 11900, 13400, 16100, 18400];
+
+  var weeks = d3.range(1, 13);
+  var channels = [
+    { name: 'Website',    values: [42, 45, 51, 49, 56, 61, 58, 66, 72, 75, 81, 88] },
+    { name: 'Newsletter', values: [30, 33, 31, 36, 38, 35, 33, 39, 42, 41, 46, 49] },
+    { name: 'Events',     values: [12, 18, 15, 14, 22, 20, 17, 19, 24, 21, 26, 28] }
+  ];
+
+  var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var types = [
+    { name: 'Articles',     values: [3.1, 3.8, 4.2, 3.9, 3.0, 1.8, 2.2] },
+    { name: 'Case studies', values: [4.4, 5.2, 5.6, 5.1, 4.0, 2.1, 2.6] },
+    { name: 'Notes',        values: [2.0, 2.3, 2.1, 2.4, 2.6, 2.9, 3.3] },
+    { name: 'Newsletter',   values: [3.6, 4.1, 3.9, 4.6, 3.2, 1.5, 1.9] }
+  ];
+
+  /* ---------- Table views (accessibility: every chart has one) ---------- */
+  function table(id, head, rows) {
+    var d = document.querySelector('.chart-table[data-for="' + id + '"]');
+    var html = '<div class="table-wrap"><table class="table"><thead><tr>' + head.map(function (h, i) { return '<th' + (i ? ' class="r"' : '') + '>' + h + '</th>'; }).join('') + '</tr></thead><tbody>';
+    rows.forEach(function (r) { html += '<tr>' + r.map(function (c, i) { return '<td' + (i ? ' class="r"' : '') + '>' + c + '</td>'; }).join('') + '</tr>'; });
+    d.insertAdjacentHTML('beforeend', html + '</tbody></table></div>');
+  }
+  table('c1', ['Month', 'Visits'], months.map(function (m, i) { return [m, ChartTheme.full(visits[i])]; }));
+  table('c2', ['Week'].concat(channels.map(function (c) { return c.name; })), weeks.map(function (w, i) { return ['Week ' + w].concat(channels.map(function (c) { return c.values[i]; })); }));
+  table('c3', ['Type'].concat(days), types.map(function (t) { return [t.name].concat(t.values.map(function (v) { return v.toFixed(1) + '%'; })); }));
+
+  /* ---------- 1. Column chart ---------- */
+  var c1 = document.getElementById('c1');
+  var tip1 = ChartTheme.tooltip(c1);
+  ChartTheme.observe(c1, function () {
+    var t = ChartTheme.read(c1);
+    var W = c1.clientWidth, H = Math.max(200, Math.min(280, W * 0.45));
+    var m = { top: 22, right: 4, bottom: 24, left: 40 };
+    d3.select(c1).select('svg').remove();
+    var svg = d3.select(c1).insert('svg', ':first-child').attr('viewBox', [0, 0, W, H]).attr('aria-hidden', 'true');
+
+    var x = d3.scaleBand().domain(months).range([m.left, W - m.right]).paddingInner(0.3).paddingOuter(0.15);
+    var y = d3.scaleLinear().domain([0, d3.max(visits)]).nice().range([H - m.bottom, m.top]);
+
+    svg.append('g').attr('transform', 'translate(' + m.left + ',0)')
+      .call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.left - m.right)).tickPadding(8).tickFormat(ChartTheme.compact))
+      .call(function (g) { ChartTheme.styleAxis(g, t, { grid: true, hideDomain: true }); });
+    svg.append('g').attr('transform', 'translate(0,' + (H - m.bottom) + ')')
+      .call(d3.axisBottom(x).tickSize(0).tickPadding(8).tickValues(W < 480 ? months.filter(function (d, i) { return i % 2 === 0; }) : months))
+      .call(function (g) { ChartTheme.styleAxis(g, t); });
+
+    var bw = Math.min(24, x.bandwidth());
+    var peak = d3.maxIndex(visits);
+    svg.append('g').selectAll('path').data(visits).join('path')
+      .attr('d', function (v, i) { return ChartTheme.columnPath(x(months[i]) + (x.bandwidth() - bw) / 2, y(v), bw, y(0) - y(v), 4); })
+      .attr('fill', t.series[0])
+      .attr('opacity', function (v, i) { return i === peak ? 1 : 0.85; });
+
+    // Selective direct label: the peak only.
+    svg.append('text').attr('x', x(months[peak]) + x.bandwidth() / 2).attr('y', y(visits[peak]) - 7)
+      .attr('text-anchor', 'middle').attr('font-family', t.sans).attr('font-size', 11).attr('font-weight', 650)
+      .attr('fill', t.ink).text(ChartTheme.compact(visits[peak]));
+
+    // Hit targets: the full band, taller than the mark.
+    svg.append('g').selectAll('rect').data(visits).join('rect')
+      .attr('x', function (v, i) { return x(months[i]) - x.step() * x.paddingInner() / 2; }).attr('width', x.step())
+      .attr('y', m.top).attr('height', H - m.top - m.bottom).attr('fill', 'transparent')
+      .on('pointerenter pointermove', function (e, v) {
+        var i = visits.indexOf(v);
+        tip1.show('<div class="muted">' + months[i] + '</div><b>' + ChartTheme.full(v) + '</b> visits', x(months[i]) + x.bandwidth() / 2, y(v));
+      })
+      .on('pointerleave', tip1.hide);
+  });
+
+  /* ---------- 2. Line chart ---------- */
+  var c2 = document.getElementById('c2');
+  var tip2 = ChartTheme.tooltip(c2);
+  ChartTheme.observe(c2, function () {
+    var t = ChartTheme.read(c2);
+    document.getElementById('c2-legend').innerHTML = channels.map(function (c, i) {
+      return '<span><i style="--c:' + t.series[i] + '"></i>' + c.name + '</span>';
+    }).join('');
+
+    var W = c2.clientWidth, H = Math.max(220, Math.min(300, W * 0.5));
+    var narrow = W < 520;
+    var m = { top: 12, right: narrow ? 12 : 84, bottom: 24, left: 34 };
+    d3.select(c2).select('svg').remove();
+    var svg = d3.select(c2).insert('svg', ':first-child').attr('viewBox', [0, 0, W, H]).attr('aria-hidden', 'true');
+
+    var x = d3.scaleLinear().domain([1, 12]).range([m.left, W - m.right]);
+    var y = d3.scaleLinear().domain([0, d3.max(channels, function (c) { return d3.max(c.values); })]).nice().range([H - m.bottom, m.top]);
+
+    svg.append('g').attr('transform', 'translate(' + m.left + ',0)')
+      .call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.left - m.right)).tickPadding(8))
+      .call(function (g) { ChartTheme.styleAxis(g, t, { grid: true, hideDomain: true }); });
+    svg.append('g').attr('transform', 'translate(0,' + (H - m.bottom) + ')')
+      .call(d3.axisBottom(x).ticks(narrow ? 4 : 12).tickSize(0).tickPadding(8).tickFormat(function (d) { return 'W' + d; }))
+      .call(function (g) { ChartTheme.styleAxis(g, t); });
+
+    var line = d3.line().x(function (d, i) { return x(i + 1); }).y(function (d) { return y(d); }).curve(d3.curveMonotoneX);
+    channels.forEach(function (c, i) {
+      svg.append('path').attr('d', line(c.values)).attr('fill', 'none').attr('stroke', t.series[i])
+        .attr('stroke-width', 2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round');
+      var last = c.values[c.values.length - 1];
+      svg.append('circle').attr('cx', x(12)).attr('cy', y(last)).attr('r', 4)
+        .attr('fill', t.series[i]).attr('stroke', t.surface).attr('stroke-width', 2);
+      if (!narrow) {
+        svg.append('text').attr('x', x(12) + 10).attr('y', y(last)).attr('dy', '0.35em')
+          .attr('font-family', t.sans).attr('font-size', 11).attr('fill', t.ink2)
+          .text(c.name + ' ' + last);
+      }
+    });
+
+    // Crosshair + tooltip
+    var cross = svg.append('line').attr('y1', m.top).attr('y2', H - m.bottom).attr('stroke', t.line2).attr('stroke-width', 1).attr('visibility', 'hidden');
+    svg.append('rect').attr('x', m.left).attr('y', m.top).attr('width', W - m.left - m.right).attr('height', H - m.top - m.bottom)
+      .attr('fill', 'transparent')
+      .on('pointermove', function (e) {
+        var px = d3.pointer(e)[0];
+        var i = Math.max(0, Math.min(11, Math.round(x.invert(px)) - 1));
+        cross.attr('x1', x(i + 1)).attr('x2', x(i + 1)).attr('visibility', 'visible');
+        var rows = channels.map(function (c, k) {
+          return '<div class="row"><span class="dot" style="--c:' + t.series[k] + '"></span>' + c.name + '<span class="sp"></span><b>' + c.values[i] + '</b></div>';
+        }).join('');
+        tip2.show('<div class="muted">Week ' + (i + 1) + '</div>' + rows, x(i + 1), m.top + 10);
+      })
+      .on('pointerleave', function () { cross.attr('visibility', 'hidden'); tip2.hide(); });
+  });
+
+  /* ---------- 3. Small multiples ---------- */
+  var c3 = document.getElementById('c3');
+  var yMax = d3.max(types, function (tp) { return d3.max(tp.values); });
+  types.forEach(function (tp) {
+    var panel = document.createElement('div');
+    panel.className = 'stack tight';
+    panel.innerHTML = '<span class="label">' + tp.name + '</span><div class="chart" role="img" aria-label="' + tp.name + ': reply rate by weekday, highest on ' + days[d3.maxIndex(tp.values)] + '"></div>';
+    c3.appendChild(panel);
+    var el = panel.querySelector('.chart');
+    var tip = ChartTheme.tooltip(el);
+    ChartTheme.observe(el, function () {
+      var t = ChartTheme.read(el);
+      var W = el.clientWidth, H = 140;
+      var m = { top: 16, right: 2, bottom: 20, left: 28 };
+      d3.select(el).select('svg').remove();
+      var svg = d3.select(el).insert('svg', ':first-child').attr('viewBox', [0, 0, W, H]).attr('aria-hidden', 'true');
+      var x = d3.scaleBand().domain(days).range([m.left, W - m.right]).paddingInner(0.3);
+      var y = d3.scaleLinear().domain([0, yMax]).nice().range([H - m.bottom, m.top]);
+      svg.append('g').attr('transform', 'translate(' + m.left + ',0)')
+        .call(d3.axisLeft(y).ticks(3).tickSize(-(W - m.left - m.right)).tickPadding(6).tickFormat(function (d) { return d + '%'; }))
+        .call(function (g) { ChartTheme.styleAxis(g, t, { grid: true, hideDomain: true }); });
+      svg.append('g').attr('transform', 'translate(0,' + (H - m.bottom) + ')')
+        .call(d3.axisBottom(x).tickSize(0).tickPadding(6).tickFormat(function (d) { return d.charAt(0); }))
+        .call(function (g) { ChartTheme.styleAxis(g, t); });
+      var bw = Math.min(24, x.bandwidth());
+      var top = d3.maxIndex(tp.values);
+      svg.append('g').selectAll('path').data(tp.values).join('path')
+        .attr('d', function (v, i) { return ChartTheme.columnPath(x(days[i]) + (x.bandwidth() - bw) / 2, y(v), bw, y(0) - y(v), 4); })
+        .attr('fill', t.series[0]).attr('opacity', function (v, i) { return i === top ? 1 : 0.55; });
+      svg.append('text').attr('x', x(days[top]) + x.bandwidth() / 2).attr('y', y(tp.values[top]) - 5)
+        .attr('text-anchor', 'middle').attr('font-family', t.sans).attr('font-size', 10.5).attr('font-weight', 650)
+        .attr('fill', t.ink).text(tp.values[top].toFixed(1) + '%');
+      svg.append('g').selectAll('rect').data(tp.values).join('rect')
+        .attr('x', function (v, i) { return x(days[i]) - x.step() * x.paddingInner() / 2; }).attr('width', x.step())
+        .attr('y', m.top).attr('height', H - m.top - m.bottom).attr('fill', 'transparent')
+        .on('pointerenter pointermove', function (e, v) {
+          var i = tp.values.indexOf(v);
+          tip.show('<div class="muted">' + tp.name + ' · ' + days[i] + '</div><b>' + v.toFixed(1) + '%</b> replied', x(days[i]) + x.bandwidth() / 2, y(v));
+        })
+        .on('pointerleave', tip.hide);
+    });
+  });
+})();
+</script>
+</body>
+</html>

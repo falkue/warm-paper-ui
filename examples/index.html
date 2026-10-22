@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Component Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/theme.js"></script>
+  <script src="../icons/icons.js" defer></script>
+  <style>
+    /* Gallery chrome only (not part of the kit). */
+    .g-wrap { width: min(1400px, 100% - 32px); margin: 0 auto; padding: 24px 0 64px; display: flex; flex-direction: column; gap: 28px; }
+    .g-head { display: flex; flex-direction: column; gap: 12px; }
+    .g-sec { display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 16px; }
+    .g-sec > h2 { font-size: 26px; }
+    .g-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .g-pane { background: var(--win); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 14px; min-width: 0; position: relative; box-shadow: var(--shadow-card); }
+    .g-pane { padding-top: 40px; }
+    .g-pane > .g-tag { position: absolute; top: 10px; right: 12px; }
+    .g-pane > .seg { align-self: flex-start; }
+    .g-pane.on-page { background: var(--page); }
+    @media (max-width: 900px) { .g-pair { grid-template-columns: minmax(0, 1fr); } }
+    /* Show the sidebar statically inside a specimen, also on small screens. */
+    .g-pane .side { position: static !important; transform: none !important; visibility: visible !important; height: auto; width: 228px; max-width: 100%; box-shadow: none; border: 1px solid var(--line); border-radius: 10px; background: var(--side); }
+    .g-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 6px; }
+    .g-icons > div { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 4px; border-radius: 9px; border: 1px solid var(--line); background: var(--card); font-size: 10.5px; color: var(--ink-3); text-align: center; overflow-wrap: anywhere; }
+    .g-swatch { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 6px; }
+    .g-swatch > div { border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--card); font-size: 10.5px; }
+    .g-swatch i { display: block; height: 34px; background: var(--s); border-bottom: 1px solid var(--line); }
+    .g-swatch span { display: block; padding: 4px 6px; color: var(--ink-2); font-family: var(--mono); }
+  </style>
+</head>
+<body>
+<div class="g-wrap">
+
+  <header class="g-head">
+    <a class="brand" href="#"><span class="brand-mark" aria-hidden="true"></span>Design kit <span class="pill out">Component gallery</span></a>
+    <h1>Every component, in <em>light</em> and dark.</h1>
+    <p class="lead">Each specimen below is rendered twice: on the left with the light tokens, on the right with the dark tokens (set with <code>data-theme</code> on the panel). The switch changes the page around them.</p>
+    <div class="row wrap">
+      <span class="seg" role="group" aria-label="Page theme">
+        <button data-theme-set="light">Light</button><button data-theme-set="dark">Dark</button><button data-theme-set="system">Auto</button>
+      </span>
+      <a class="btn" href="app-shell.html">App shell example</a>
+      <a class="btn" href="article.html">Article example</a>
+      <a class="btn" href="charts.html">Chart examples</a>
+    </div>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#colour">Colour</a><a href="#type">Type</a><a href="#buttons">Buttons</a><a href="#pills">Pills</a>
+      <a href="#cards">Cards</a><a href="#forms">Forms</a><a href="#seg">Segmented &amp; tabs</a><a href="#avatars">Avatars</a>
+      <a href="#stats">Stats</a><a href="#lists">Lists</a><a href="#empty">Empty</a><a href="#overlays">Overlays</a>
+      <a href="#nav">Navigation</a><a href="#calendar">Calendar</a><a href="#icons">Icons</a>
+    </nav>
+  </header>
+
+  <!-- ============ Colour ============ -->
+  <section class="g-sec" id="colour">
+    <h2>Colour</h2>
+    <div class="g-spec">
+      <span class="label">Surfaces</span>
+      <div class="g-swatch">
+        <div><i style="--s: var(--page)"></i><span>--page</span></div><div><i style="--s: var(--page-2)"></i><span>--page-2</span></div>
+        <div><i style="--s: var(--win)"></i><span>--win</span></div><div><i style="--s: var(--pane)"></i><span>--pane</span></div>
+        <div><i style="--s: var(--card)"></i><span>--card</span></div><div><i style="--s: var(--sel)"></i><span>--sel</span></div>
+      </div>
+      <span class="label">Ink</span>
+      <div class="g-swatch">
+        <div><i style="--s: var(--ink)"></i><span>--ink</span></div><div><i style="--s: var(--ink-2)"></i><span>--ink-2</span></div>
+        <div><i style="--s: var(--ink-3)"></i><span>--ink-3</span></div><div><i style="--s: var(--ink-4)"></i><span>--ink-4</span></div>
+      </div>
+      <span class="label">Accents</span>
+      <div class="g-swatch">
+        <div><i style="--s: var(--blue)"></i><span>--blue</span></div><div><i style="--s: var(--coral)"></i><span>--coral</span></div>
+        <div><i style="--s: var(--orange)"></i><span>--orange</span></div><div><i style="--s: var(--yellow)"></i><span>--yellow</span></div>
+        <div><i style="--s: var(--green)"></i><span>--green</span></div><div><i style="--s: var(--violet)"></i><span>--violet</span></div>
+        <div><i style="--s: var(--grey)"></i><span>--grey</span></div><div><i style="--s: var(--solid)"></i><span>--solid</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Type ============ -->
+  <section class="g-sec" id="type">
+    <h2>Typography</h2>
+    <div class="g-spec">
+      <span class="kicker">Kicker label</span>
+      <div class="display">Display, <em>serif</em></div>
+      <h1>Heading one with an <em>accent</em></h1>
+      <h2>Heading two</h2>
+      <h3>Heading three</h3>
+      <h4>Heading <em>four</em></h4>
+      <p class="lead">Lead paragraph: 13.5 px, secondary ink, comfortable line length.</p>
+      <p>Body text is Inter at 13 px. <span class="muted">Muted meta text.</span> <span class="small">Small text.</span> <code>inline code</code> <mark>highlight</mark></p>
+      <div class="prose"><p>Prose text for reading is 16 px with a 1.65 line height and <a href="#">links in blue</a>.</p><blockquote>A quote in the serif italic.</blockquote></div>
+    </div>
+  </section>
+
+  <!-- ============ Buttons ============ -->
+  <section class="g-sec" id="buttons">
+    <h2>Buttons</h2>
+    <div class="g-spec">
+      <div class="row wrap">
+        <button class="btn">Default</button>
+        <button class="btn primary"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>Primary</button>
+        <button class="btn ghost">Ghost</button>
+        <button class="btn danger">Danger</button>
+        <button class="btn tint">Tinted</button>
+        <button class="btn" disabled>Disabled</button>
+      </div>
+      <div class="row wrap">
+        <button class="btn big primary">Big primary</button>
+        <button class="btn big">Big</button>
+        <button class="btn sm">Small</button>
+        <button class="btn icon" aria-label="Previous"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+        <button class="btn icon" aria-label="Next"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+        <button class="btn ghost icon" aria-label="Settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg></button>
+        <button class="linkbtn">Link button</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Pills ============ -->
+  <section class="g-sec" id="pills">
+    <h2>Pills, badges, dots, chips</h2>
+    <div class="g-spec">
+      <div class="row wrap">
+        <span class="pill c-blue">scheduled</span><span class="pill c-green">published</span><span class="pill c-coral">failed</span>
+        <span class="pill c-orange">due soon</span><span class="pill c-yellow">expiring</span><span class="pill c-violet">suggested</span><span class="pill">neutral</span>
+      </div>
+      <div class="row wrap">
+        <span class="pill out c-blue">outline</span><span class="pill out c-green">outline</span><span class="pill out">draft</span>
+        <span class="pill c-green"><span class="dot"></span>with dot</span>
+        <span class="badge">2</span><span class="badge">12</span>
+      </div>
+      <div class="row wrap">
+        <span class="dot c-blue"></span><span class="dot c-coral"></span><span class="dot c-orange"></span><span class="dot c-yellow"></span>
+        <span class="dot c-green"></span><span class="dot c-violet"></span><span class="dot"></span><span class="dot sm c-green"></span>
+      </div>
+      <div class="chips">
+        <button class="chip" aria-pressed="false"><span class="dot c-violet"></span>Idea chip</button>
+        <button class="chip" aria-pressed="true">Selected</button>
+        <button class="chip c-violet" aria-pressed="true">Selected violet</button>
+        <button class="chip" aria-pressed="false">Filter</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Cards ============ -->
+  <section class="g-sec" id="cards">
+    <h2>Cards, notes, notices</h2>
+    <div class="g-spec">
+      <div class="card">
+        <div class="row"><span class="dot c-blue"></span><div><b>Card title · 11:30</b><div class="muted small">A secondary line in muted ink.</div></div></div>
+        <div class="row wrap"><button class="btn">Preview</button><button class="btn ghost">Later</button></div>
+      </div>
+      <div class="card flat"><b>Flat card</b><span class="muted small">No shadow, for nested groups.</span></div>
+      <div class="card tinted">
+        <span class="label">Suggestion</span>
+        <span class="small" style="color: var(--ink-2)">Tinted card for generated or suggested content. Default accent violet.</span>
+        <button class="btn tint" style="align-self: flex-start">Apply</button>
+      </div>
+      <div class="panel"><b>Panel</b><span class="muted small">A recessed group on the pane surface.</span></div>
+      <div class="note"><b>Coming later:</b> the dashed note box for hints and explanations.<ul><li>Bulleted detail</li></ul></div>
+      <div class="notice"><span>Notice in blue: a neutral information line.</span><button class="btn sm">Action</button></div>
+      <div class="notice c-green"><span>Saved. Everything is up to date.</span></div>
+      <div class="notice c-orange"><span>The connection expires in 5 days.</span><button class="btn sm">Renew</button></div>
+      <div class="notice c-coral"><span>Publishing failed. Try again.</span></div>
+      <p class="error">Error text in coral.</p><p class="ok">Success text in green.</p>
+    </div>
+  </section>
+
+  <!-- ============ Forms ============ -->
+  <section class="g-sec" id="forms">
+    <h2>Form controls</h2>
+    <div class="g-spec">
+      <div class="form-grid">
+        <label class="field">Title<input class="input" value="Five questions before a redesign"></label>
+        <label class="field">Channel<select class="input"><option>Website</option><option>Newsletter</option></select></label>
+      </div>
+      <label class="field">Placeholder<input class="input" placeholder="Type something"></label>
+      <label class="field">Text<textarea class="input textarea" rows="3">Multi-line text with a vertical resize handle.</textarea></label>
+      <div class="counter">212 / 300</div>
+      <label class="field">Disabled<input class="input" value="Read only" disabled></label>
+      <div class="setting"><div><b>Publish automatically</b><span>At the planned time, without a reminder.</span></div><input type="checkbox" class="toggle" checked aria-label="Publish automatically"></div>
+      <div class="setting"><div><b>Weekly summary</b><span>Every Monday morning.</span></div><input type="checkbox" class="toggle" aria-label="Weekly summary"></div>
+      <fieldset class="radios">
+        <legend class="label" style="margin-bottom: 6px">Radio cards</legend>
+        <label class="radio"><input type="radio" name="mode" checked><i></i><div><b>Automatic</b><span>Published at the planned time.</span></div></label>
+        <label class="radio"><input type="radio" name="mode"><i></i><div><b>Reminder</b><span>You get a reminder and publish yourself.</span></div></label>
+      </fieldset>
+      <div class="row"><span class="check on"></span><span class="small">Done</span><span class="check"></span><span class="small">Open</span></div>
+    </div>
+  </section>
+
+  <!-- ============ Segmented & tabs ============ -->
+  <section class="g-sec" id="seg">
+    <h2>Segmented control and tabs</h2>
+    <div class="g-spec">
+      <div class="seg" role="group" aria-label="Range"><button aria-pressed="true">Week</button><button aria-pressed="false">Month</button><button aria-pressed="false">List</button></div>
+      <div class="tabs" role="tablist" aria-label="Views">
+        <button role="tab" aria-selected="true">Overview</button>
+        <button role="tab" aria-selected="false"><span class="count">1</span>Capture</button>
+        <button role="tab" aria-selected="false"><span class="count">2</span>Plan</button>
+        <button role="tab" aria-selected="false"><span class="count">3</span>Review</button>
+      </div>
+      <div class="tabs fill" role="tablist" aria-label="Side panel">
+        <button role="tab" aria-selected="true">Assistant</button>
+        <button role="tab" aria-selected="false">Review <span class="count">3</span></button>
+        <button role="tab" aria-selected="false">History</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Avatars ============ -->
+  <section class="g-sec" id="avatars">
+    <h2>Avatars and icon badges</h2>
+    <div class="g-spec">
+      <div class="row wrap">
+        <span class="avatar">AB</span><span class="avatar c-coral">CD</span><span class="avatar c-green">EF</span><span class="avatar c-violet">GH</span>
+        <span class="avatar lg">IJ</span><span class="avatar lg c-orange">KL</span>
+        <span class="avatars"><span class="avatar">MN</span><span class="avatar c-green">OP</span><span class="avatar c-violet">QR</span></span>
+      </div>
+      <div class="row wrap">
+        <span class="avatar square sm c-violet">S</span><span class="avatar square">TU</span><span class="avatar square c-green">VW</span><span class="avatar square lg c-coral">XY</span>
+        <span class="icon-badge"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+        <span class="icon-badge c-green"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span>
+        <span class="icon-badge c-violet"><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Stats ============ -->
+  <section class="g-sec" id="stats">
+    <h2>Stat tiles and progress</h2>
+    <div class="g-spec">
+      <div class="stats">
+        <div class="stat"><b>3<span class="delta">of 3</span></b><span>Entries this week</span></div>
+        <div class="stat"><b>14,790<span class="delta">+22%</span></b><span>Visits, 4 weeks</span></div>
+        <div class="stat"><b>3.6%<span class="delta down">−0.4</span></b><span>Reply rate</span></div>
+      </div>
+      <div class="stack tight">
+        <div class="row"><span class="small">Goal</span><span class="sp"></span><span class="small num">68 / 120</span></div>
+        <div class="progress"><i style="width: 57%"></i></div>
+        <div class="progress c-green"><i style="width: 82%"></i></div>
+        <div class="progress c-violet"><i style="width: 34%"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Lists ============ -->
+  <section class="g-sec" id="lists">
+    <h2>Lists, table, timeline</h2>
+    <div class="g-spec">
+      <div class="list">
+        <a class="list-row" href="#"><span class="time">08:00</span><div><b>List row with time</b><small>Secondary line · meta</small></div><span class="pill c-green">ready</span></a>
+        <a class="list-row" href="#"><span class="avatar square sm c-blue">AR</span><div><b>List row with avatar</b><small>Edited yesterday</small></div><span class="pill out">draft</span></a>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th>Entry</th><th class="r">Visits</th><th class="r">Replies</th></tr></thead>
+          <tbody>
+            <tr><td>Five questions before a redesign</td><td class="r">1,920</td><td class="r">64</td></tr>
+            <tr><td>A calmer checkout</td><td class="r">2,740</td><td class="r">112</td></tr>
+            <tr class="dim"><td>Weekly review (no data yet)</td><td class="r">–</td><td class="r">–</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="timeline">
+        <li><span class="node c-green"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><div><b>Published</b><small>Yesterday, 09:30</small></div></li>
+        <li><span class="node c-violet"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg></span><div><b>Two new comments</b><small>Yesterday, 14:05</small></div></li>
+        <li><span class="node"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg></span><div><b>Draft updated</b><small>Today, 08:12</small></div></li>
+      </ol>
+      <div class="thread">
+        <div class="bubble me">Can you shorten the intro?</div>
+        <div class="bubble them">Here is a version with two sentences instead of four.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Empty ============ -->
+  <section class="g-sec" id="empty">
+    <h2>Empty slots and drop targets</h2>
+    <div class="g-spec">
+      <div class="row"><button class="empty" aria-label="Add">+</button><button class="empty" aria-label="Add">+</button></div>
+      <div class="dropzone"><svg class="ic lg" aria-hidden="true"><use href="#i-image"/></svg><b>Drop files here</b><span class="muted small">or</span><button class="btn">Choose files</button></div>
+      <div class="dropzone over"><b>Release to upload</b></div>
+    </div>
+  </section>
+
+  <!-- ============ Overlays ============ -->
+  <section class="g-sec" id="overlays">
+    <h2>Menu, dialog, toast, spinner</h2>
+    <div class="g-spec">
+      <div class="menu" role="menu" style="max-width: 300px">
+        <button class="menu-item on" role="menuitemradio" aria-checked="true"><span class="avatar">NS</span><div><b>Northwind Studio</b><small>Owner</small></div></button>
+        <button class="menu-item" role="menuitemradio" aria-checked="false"><span class="avatar c-green">LB</span><div><b>Lakeside Bakery</b><small>Editor</small></div></button>
+        <a class="menu-foot" href="#">Manage workspaces</a>
+      </div>
+      <div class="dialog static" role="dialog" aria-label="Move entry">
+        <div class="dialog-head"><div><h3 class="h4">Move <em>entry</em></h3><span class="muted small">Pick a new day and time.</span></div><span class="sp"></span><button class="btn ghost icon" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+        <div class="dialog-body"><label class="field">Day<input class="input" value="Wednesday, 28 October"></label></div>
+        <div class="dialog-foot"><span class="sp"></span><button class="btn ghost">Cancel</button><button class="btn primary">Move</button></div>
+      </div>
+      <div class="toast static">Entry moved to Wednesday.<button class="btn ghost sm">Undo</button></div>
+      <div class="row"><span class="spinner"></span><span class="muted small">Loading…</span></div>
+    </div>
+  </section>
+
+  <!-- ============ Navigation ============ -->
+  <section class="g-sec" id="nav">
+    <h2>Navigation</h2>
+    <div class="g-spec">
+      <div class="row top wrap" style="gap: 16px">
+        <aside class="side" aria-label="Sidebar specimen">
+          <div class="side-head"><span class="brand"><span class="brand-mark" aria-hidden="true"></span>Northwind</span></div>
+          <div class="account"><span class="avatar lg">NS</span><div><b>Northwind Studio</b><small>Shared workspace</small></div></div>
+          <nav class="nav" aria-label="Specimen">
+            <a class="nav-item on" href="#"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>Planning<span class="count">9</span></a>
+            <a class="nav-item" href="#"><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg>Ideas<span class="count">17</span></a>
+            <a class="nav-item sub" href="#">Archived</a>
+            <a class="nav-item" href="#"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg>Feedback<span class="badge">2</span></a>
+            <a class="nav-item muted" href="#"><svg class="ic" aria-hidden="true"><use href="#i-archive"/></svg>Disabled</a>
+          </nav>
+          <div>
+            <div class="label side-label">Channels</div>
+            <a class="nav-row" href="#"><span class="dot c-blue"></span>Website<span class="status">connected</span></a>
+            <a class="nav-row" href="#"><span class="dot c-orange"></span>Newsletter<span class="status warn">renew</span></a>
+            <div class="nav-row"><svg class="ic sm muted" aria-hidden="true"><use href="#i-phone"/></svg>Mobile app<span class="status off">paused</span></div>
+          </div>
+          <div class="side-foot"><span class="dot sm c-green"></span>All changes saved</div>
+        </aside>
+        <div class="stack" style="flex: 1 1 260px">
+          <div class="topbar" style="border: 1px solid var(--line); border-radius: 10px">
+            <h3 class="title">Week <em>43</em></h3><span class="sub">19 – 25 October</span><span class="sp"></span><button class="btn primary">New</button>
+          </div>
+          <div class="mobile-bar" style="display: flex; border: 1px solid var(--line); border-radius: 10px; position: static">
+            <button class="btn ghost icon" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
+            <span class="brand"><span class="brand-mark" aria-hidden="true"></span>Mobile top bar</span>
+          </div>
+          <div class="site-bar" style="position: static; border: 1px solid var(--line); border-radius: 10px">
+            <div class="container" style="width: auto; padding-inline: 12px"><span class="brand"><span class="brand-mark" aria-hidden="true"></span>Site bar</span><span class="sp"></span>
+              <nav class="site-nav" aria-label="Specimen"><a href="#">Work</a><a href="#" aria-current="page">Journal</a><a href="#">About</a></nav></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Calendar ============ -->
+  <section class="g-sec" id="calendar">
+    <h2>Calendar</h2>
+    <div class="g-spec">
+      <div class="scroll-x" tabindex="0" aria-label="Week grid">
+        <div class="week compact">
+          <div class="day-head"><span class="wd">Mon</span><span class="n">19</span></div>
+          <div class="day-head"><span class="wd">Tue</span><span class="n">20</span></div>
+          <div class="day-head"><span class="wd">Wed</span><span class="n">21</span></div>
+          <div class="day-head today"><span class="wd">Thu</span><span class="n">22</span></div>
+          <div class="day-head"><span class="wd">Fri</span><span class="n">23</span></div>
+          <div class="day-head"><span class="wd">Sat</span><span class="n">24</span></div>
+          <div class="day-head"><span class="wd">Sun</span><span class="n">25</span></div>
+          <div class="band"><span class="span-bar" style="grid-column: 2 / span 4">Campaign band</span></div>
+          <div class="day"><a class="event" href="#"><span class="time">08:00</span><p>Entry card</p><span class="pill c-green">done</span></a></div>
+          <div class="day"></div>
+          <div class="day"><div class="event placeholder c-violet"><span class="time">Slot</span><p>Placeholder</p></div></div>
+          <div class="day today"><a class="event edge c-blue" href="#"><span class="time">11:30</span><p>Accent edge</p></a></div>
+          <div class="day"><button class="empty" aria-label="Add">+</button></div>
+          <div class="day"></div>
+          <div class="day"><a class="event" href="#"><span class="time">19:00</span><p>Draft</p><span class="pill out">draft</span></a></div>
+        </div>
+      </div>
+      <div class="scroll-x" tabindex="0" aria-label="Month grid">
+        <div class="month">
+          <div class="month-head">Mon</div><div class="month-head">Tue</div><div class="month-head">Wed</div><div class="month-head">Thu</div><div class="month-head">Fri</div><div class="month-head">Sat</div><div class="month-head">Sun</div>
+          <div class="month-day out"><span class="n">28</span></div><div class="month-day out"><span class="n">29</span></div><div class="month-day out"><span class="n">30</span></div>
+          <div class="month-day"><span class="n">1</span><a class="mini-event" href="#"><span class="dot c-green"></span><span class="tt">Launch notes</span></a></div>
+          <div class="month-day"><span class="n">2</span></div><div class="month-day"><span class="n">3</span></div><div class="month-day"><span class="n">4</span></div>
+          <div class="month-day"><span class="n">19</span></div><div class="month-day"><span class="n">20</span></div>
+          <div class="month-day"><span class="n">21</span><a class="mini-event" href="#"><span class="dot c-green"></span><span class="tt">Case study</span></a></div>
+          <div class="month-day today"><span class="n">22</span><a class="mini-event" href="#"><span class="dot c-blue"></span><span class="tt">Photo story</span></a><a class="mini-event" href="#"><span class="dot c-violet"></span><span class="tt">Newsletter</span></a></div>
+          <div class="month-day"><span class="n">23</span></div><div class="month-day"><span class="n">24</span></div><div class="month-day"><span class="n">25</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Icons ============ -->
+  <section class="g-sec" id="icons">
+    <h2>Icons</h2>
+    <div class="g-spec">
+      <div class="g-icons" id="icon-list"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Gallery only: render the icon list, then show every specimen in a light and a dark panel.
+  (function () {
+    var names = ['calendar','bulb','bars','message','chart-line','image','settings','plus','chevron-left','chevron-right','chevron-down','menu','close','phone','mail','log-out','archive','pen','mic','user','eye','users','check','search','arrow-right','home'];
+    var list = document.getElementById('icon-list');
+    list.removeAttribute('id');
+    names.forEach(function (n) {
+      var d = document.createElement('div');
+      d.innerHTML = '<svg class="ic lg" aria-hidden="true"><use href="#i-' + n + '"/></svg>' + n;
+      list.appendChild(d);
+    });
+
+    var specs = document.querySelectorAll('.g-spec');
+    Array.prototype.forEach.call(specs, function (spec, i) {
+      var pair = document.createElement('div');
+      pair.className = 'g-pair';
+      var copy = spec.cloneNode(true);
+      ['light', 'dark'].forEach(function (theme) {
+        var pane = document.createElement('div');
+        pane.className = 'g-pane';
+        pane.setAttribute('data-theme', theme);
+        pane.innerHTML = '<span class="pill out g-tag">' + (theme === 'light' ? 'Light' : 'Dark') + '</span>';
+        var body = theme === 'light' ? spec : copy;
+        while (body.firstChild) pane.appendChild(body.firstChild);
+        // Keep radio groups separate per panel.
+        Array.prototype.forEach.call(pane.querySelectorAll('input[type=radio]'), function (r) { r.name = r.name + '-' + theme + i; });
+        pair.appendChild(pane);
+      });
+      spec.replaceWith(pair);
+    });
+  })();
+</script>
+</body>
+</html>

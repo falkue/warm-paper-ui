@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Design tokens
+   Light values live on :root (and on any element with data-theme="light").
+   Dark values apply when the system prefers dark and the page has not been
+   forced to light, or when data-theme="dark" is set on :root or on any
+   element (useful for previews that show both themes side by side).
+   ========================================================================== */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* --- Surfaces: warm paper, from the outer page to the innermost card --- */
+  --page:   #F3EFE7;               /* outer page background */
+  --page-2: #E9E4D9;               /* deeper page tone (code, keyboard, wells) */
+  --win:    #FBF9F5;               /* main content area ("window") */
+  --pane:   #F6F3ED;               /* secondary panes: right column, table heads */
+  --card:   #FFFFFF;               /* cards, inputs on panes, tiles */
+  --side:   rgba(238, 233, 224, .66); /* translucent sidebar (used with backdrop-filter) */
+
+  /* --- Ink: a quiet four-step text scale --- */
+  --ink:   #22211F;                /* primary text */
+  --ink-2: #5D5A54;                /* secondary text, body copy on panes */
+  --ink-3: #8C887F;                /* meta text, labels, counts (see contrast notes) */
+  --ink-4: #B7B2A8;                /* disabled, placeholders, decorative only */
+
+  /* --- Lines and state washes (all translucent, so they sit on any surface) --- */
+  --line:   rgba(45, 38, 28, .10); /* hairline borders, dividers */
+  --line-2: rgba(45, 38, 28, .17); /* control borders, dashed boxes */
+  --sel:    rgba(45, 38, 28, .075);/* selected nav item, segmented track */
+  --hover:  rgba(45, 38, 28, .04); /* hover wash */
+
+  /* --- Accents: used as tints that carry meaning, rarely as solid fills --- */
+  --blue:   #3E78D8;               /* selection, links, focus, "today" */
+  --coral:  #E05A6D;               /* emphasis in headings, errors, destructive */
+  --orange: #E5893A;               /* attention, close to a limit */
+  --yellow: #D69A1E;               /* expiring, highlight */
+  --green:  #3A9A5D;               /* success, positive change */
+  --violet: #8466D3;               /* generated / suggested content */
+  --grey:   #8A877F;               /* neutral, draft */
+
+  --solid:   #3A73D3;              /* the one solid fill: primary button, own chat bubble */
+  --onsolid: #FFFFFF;              /* text on --solid */
+  --tint:    13%;                  /* accent share in tinted backgrounds (pills, bars) */
+
+  /* --- Warm background glow (three radial gradients on body) --- */
+  --w1: #F2C7A3;
+  --w2: #C6D3EC;
+  --w3: #E8B6C1;
+
+  /* --- Shadows: soft and warm --- */
+  --shadow-card: 0 1px 2px rgba(45, 38, 28, .06), 0 6px 20px -10px rgba(45, 38, 28, .18);
+  --shadow-win:  0 0 0 .5px var(--line-2), 0 30px 70px -26px rgba(70, 45, 20, .38);
+  --shadow-pop:  0 18px 40px -16px rgba(0, 0, 0, .35);
+  --scrim:       rgba(20, 15, 10, .35);
+
+  /* --- Charts: categorical series in fixed order (validated for colour-vision
+     deficiency and contrast against --card). Max four series; fold the rest
+     into "Other" (--chart-other) or use small multiples. --- */
+  --chart-1: #3E78D8;  /* blue */
+  --chart-2: #C57632;  /* orange, one step darker than --orange for 3:1 on white */
+  --chart-3: #8466D3;  /* violet */
+  --chart-4: #3A9A5D;  /* green */
+  --chart-other: #8A877F;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #141312; --page-2: #1C1B19; --win: #1E1D1B; --pane: #1A1918; --card: #272624;
+    --side: rgba(44, 41, 37, .62);
+    --ink: #EEEBE4; --ink-2: #B4AFA6; --ink-3: #88847C; --ink-4: #5D5953;
+    --line: rgba(255, 248, 235, .085); --line-2: rgba(255, 248, 235, .14);
+    --sel: rgba(255, 248, 235, .09); --hover: rgba(255, 248, 235, .05);
+    --blue: #6C9DEC; --coral: #EE7587; --orange: #EFA062; --yellow: #E5B54E;
+    --green: #5DB67E; --violet: #A38BE7; --grey: #9D998F;
+    --solid: #3F7BDB; --onsolid: #FFFFFF; --tint: 20%;
+    --w1: #3A2A1F; --w2: #1F2838; --w3: #33222A;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 20px -10px rgba(0, 0, 0, .5);
+    --shadow-win:  0 0 0 .5px var(--line-2), 0 30px 70px -26px rgba(0, 0, 0, .7);
+    --shadow-pop:  0 18px 40px -16px rgba(0, 0, 0, .35);
+    --scrim:       rgba(20, 15, 10, .35);
+    --chart-1: #618DD4; --chart-2: #BF804E; --chart-3: #937DD0; --chart-4: #54A471; --chart-other: #9D998F;
+  }
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #141312; --page-2: #1C1B19; --win: #1E1D1B; --pane: #1A1918; --card: #272624;
+  --side: rgba(44, 41, 37, .62);
+  --ink: #EEEBE4; --ink-2: #B4AFA6; --ink-3: #88847C; --ink-4: #5D5953;
+  --line: rgba(255, 248, 235, .085); --line-2: rgba(255, 248, 235, .14);
+  --sel: rgba(255, 248, 235, .09); --hover: rgba(255, 248, 235, .05);
+  --blue: #6C9DEC; --coral: #EE7587; --orange: #EFA062; --yellow: #E5B54E;
+  --green: #5DB67E; --violet: #A38BE7; --grey: #9D998F;
+  --solid: #3F7BDB; --onsolid: #FFFFFF; --tint: 20%;
+  --w1: #3A2A1F; --w2: #1F2838; --w3: #33222A;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 20px -10px rgba(0, 0, 0, .5);
+  --shadow-win:  0 0 0 .5px var(--line-2), 0 30px 70px -26px rgba(0, 0, 0, .7);
+  --shadow-pop:  0 18px 40px -16px rgba(0, 0, 0, .35);
+  --scrim:       rgba(20, 15, 10, .35);
+  --chart-1: #618DD4; --chart-2: #BF804E; --chart-3: #937DD0; --chart-4: #54A471; --chart-other: #9D998F;
+}
+
+/* --- Non-colour tokens (identical in both themes) --- */
+:root {
+  /* Type families: one serif display face, one sans for everything else */
+  --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --mono:  ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type sizes (the UI is deliberately small and dense) */
+  --fs-label: 10.5px;  /* uppercase labels, pills */
+  --fs-meta:  11px;    /* field captions, timestamps */
+  --fs-small: 11.5px;  /* secondary lines, counts */
+  --fs-ui:    12.5px;  /* buttons, list titles */
+  --fs-body:  13px;    /* default body */
+  --fs-prose: 16px;    /* long-form reading text (.prose) */
+
+  /* Weights. Inter is loaded at 400/500/600/700; 550 and 650 render as the
+     nearest loaded weight unless you load the variable axis (see README). */
+  --fw-medium: 550;
+  --fw-label:  650;
+
+  /* Label style */
+  --label-tracking: .08em;
+
+  /* Radii */
+  --radius-xs:     5px;   /* tiny chips, small badges */
+  --radius-sm:     6px;   /* segmented option, small icon buttons */
+  --radius:        7px;   /* buttons, inputs, nav items */
+  --radius-seg:    8px;   /* segmented track */
+  --radius-item:   9px;   /* calendar entries, notices, radio cards */
+  --radius-tile:   10px;  /* stat tiles, week grid, tab track, big buttons */
+  --radius-card:   11px;  /* cards, note boxes */
+  --radius-panel:  12px;  /* panels, popovers */
+  --radius-dialog: 14px;  /* dialogs */
+  --radius-pill:   999px;
+
+  /* Layout */
+  --side-w:  228px;                      /* sidebar width */
+  --right-w: clamp(260px, 20vw, 290px);  /* right pane width */
+  --gutter:  18px;                       /* horizontal content padding (12px on mobile) */
+}

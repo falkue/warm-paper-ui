@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Studio Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/theme.js"></script>
+  <script src="../icons/icons.js" defer></script>
+  <style>
+    /* Page-specific: an abstract cover made only from tokens (no image needed). */
+    .cover { aspect-ratio: 16 / 7; background:
+      radial-gradient(60% 90% at 15% 20%, var(--w1), transparent 70%),
+      radial-gradient(50% 80% at 85% 30%, var(--w2), transparent 70%),
+      radial-gradient(60% 90% at 55% 100%, var(--w3), transparent 70%), var(--pane); }
+    .cover.small { aspect-ratio: 16 / 9; }
+    .article-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 40px; align-items: start; }
+    .article-grid aside { position: sticky; top: 72px; }
+    @media (max-width: 900px) { .article-grid { grid-template-columns: minmax(0, 1fr); } .article-grid aside { position: static; } }
+  </style>
+</head>
+<body>
+
+<header class="site-bar">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Northwind Studio</a>
+    <span class="sp"></span>
+    <nav class="site-nav" aria-label="Main">
+      <a href="#">Work</a>
+      <a href="#" aria-current="page">Journal</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+    <span class="seg" role="group" aria-label="Theme">
+      <button data-theme-set="light">Light</button><button data-theme-set="dark">Dark</button><button data-theme-set="system">Auto</button>
+    </span>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <header class="hero">
+      <span class="kicker">Journal · Design notes</span>
+      <h1 class="display">Designing with <em>less</em> colour</h1>
+      <p class="lead">Warm neutrals do most of the work. Colour is kept for the few things that carry meaning, which is exactly why it is noticed when it appears.</p>
+      <div class="byline">
+        <span class="avatars"><span class="avatar">NS</span><span class="avatar c-coral">ED</span></span>
+        <span>Northwind editorial team</span><span aria-hidden="true">·</span><time datetime="2026-10-22">22 October 2026</time><span aria-hidden="true">·</span><span>6 min read</span>
+      </div>
+    </header>
+
+    <figure class="media" style="margin-bottom: 36px">
+      <div class="cover" role="img" aria-label="Abstract warm gradient"></div>
+    </figure>
+
+    <div class="article-grid">
+      <article class="prose">
+        <p>Most interfaces we are asked to review have the same problem: everything is shouting. Every status has a colour, every button is filled, every card has a coloured top border. After a minute the eye stops reading colour altogether.</p>
+        <p>We start the other way round. The page is paper, the text is ink, and borders are a single hairline. Then we ask which few things deserve an accent, and we give each of them <strong>one meaning that never changes</strong>.</p>
+
+        <h2>A short <em>palette</em> of meanings</h2>
+        <p>Seven accents are enough for almost any product. Blue marks selection and links. Green means done or up. Coral is reserved for emphasis and for things that went wrong. Violet labels anything suggested by a machine, so readers know what a person wrote and what they did not.</p>
+        <p class="row wrap" style="gap: 6px">
+          <span class="pill c-blue">selected</span><span class="pill c-green">done</span><span class="pill c-coral">failed</span>
+          <span class="pill c-orange">close to limit</span><span class="pill c-yellow">expiring</span><span class="pill c-violet">suggested</span><span class="pill">neutral</span>
+        </p>
+
+        <blockquote>Colour is a promise. Use it only where you can keep it.</blockquote>
+
+        <h2>Tints, not fills</h2>
+        <p>An accent rarely appears as a solid area. Instead it is mixed into the card colour at around thirteen percent, and the text on top is the accent pulled towards the ink. The result reads clearly in both light and dark themes without ever turning into a warning sign.</p>
+        <ul>
+          <li>Solid fills only for the single primary action on a screen.</li>
+          <li>Hairline borders instead of heavy outlines.</li>
+          <li>Soft, warm shadows that suggest depth rather than draw edges.</li>
+        </ul>
+
+        <div class="note">
+          <b>Try it yourself:</b> open the component gallery and switch between light and dark. Every tint is computed from the same seven accents with <code>color-mix()</code>.
+        </div>
+
+        <h3>One serif, used sparingly</h3>
+        <p>Display headings use a single serif at regular weight. Everything else, from buttons to body copy, is set in a quiet sans. A single italic word in coral is the only ornament a heading gets.</p>
+        <p>Read more in our <a href="#">notes on typography</a>.</p>
+      </article>
+
+      <aside class="stack">
+        <div class="card">
+          <span class="label">In this article</span>
+          <div class="list">
+            <a class="list-row" href="#"><div><b>A short palette of meanings</b></div></a>
+            <a class="list-row" href="#"><div><b>Tints, not fills</b></div></a>
+            <a class="list-row" href="#" style="border-bottom: 0"><div><b>One serif, used sparingly</b></div></a>
+          </div>
+        </div>
+        <div class="card tinted c-blue">
+          <span class="label">Newsletter</span>
+          <p class="small" style="color: var(--ink-2)">One short letter a month about calm interfaces. No tracking, unsubscribe any time.</p>
+          <label class="field">Your address<input class="input" type="text" placeholder="name at example dot com" autocomplete="off"></label>
+          <button class="btn primary">Subscribe</button>
+        </div>
+      </aside>
+    </div>
+
+    <section style="margin-top: 56px" aria-labelledby="more">
+      <div class="row" style="margin-bottom: 14px; align-items: baseline">
+        <h2 id="more" class="h3">More from the <em>journal</em></h2>
+        <span class="sp"></span>
+        <a class="btn ghost" href="#">All articles<svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </div>
+      <div class="card-grid">
+        <a class="card" href="#">
+          <div class="media"><div class="cover small"></div></div>
+          <span class="pill c-green">Case study</span>
+          <h3 class="h4">A calmer <em>checkout</em></h3>
+          <p class="muted">Removing four colours and one step lifted completed orders for a small shop.</p>
+        </a>
+        <a class="card" href="#">
+          <div class="media"><div class="cover small"></div></div>
+          <span class="pill c-violet">Essay</span>
+          <h3 class="h4">Labelling what the <em>machine</em> wrote</h3>
+          <p class="muted">Why suggested text deserves its own quiet colour.</p>
+        </a>
+        <a class="card" href="#">
+          <div class="media"><div class="cover small"></div></div>
+          <span class="pill c-blue">Guide</span>
+          <h3 class="h4">Hairlines and <em>shadows</em></h3>
+          <p class="muted">Building depth with translucent borders and warm, soft shadows.</p>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Northwind Studio</a>
+    <span class="sp"></span>
+    <span>A fictional studio used to demonstrate the design kit.</span>
+  </div>
+</footer>
+</body>
+</html>
